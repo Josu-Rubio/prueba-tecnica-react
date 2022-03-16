@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import Topbar from '../topbar/Topbar';
 import Footer from '../footer/Footer';
@@ -8,7 +8,7 @@ import './home.css';
 export default function Home() {
   const [ads, setAds] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [query, setQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState();
 
   useEffect((query) => {
     const fetchAds = async () => {
@@ -32,9 +32,6 @@ export default function Home() {
     getCategories();
   });
 
-  const menuItems = [...new Set(ads.map((ads) => ads.category))];
-  console.log((ads) => ads.category);
-
   const categoryList = [];
 
   for (const [i, value] of categories.entries()) {
@@ -45,18 +42,28 @@ export default function Home() {
     );
   }
 
-  const categoryChange = () => {
-    setQuery(categories);
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
   };
+
+  const getFilteredList = () => {
+    if (!selectedCategory) {
+      return ads;
+    }
+    return ads.filter((item) => item.category === selectedCategory);
+  };
+
+  const filteredList = useMemo(getFilteredList, [selectedCategory, ads]);
 
   return (
     <>
       <div className='topbarContainer'>
         <div className='topbarLeft'>
-          <h2>Name of the shop</h2>
+          <h2>Virtual Shop</h2>
         </div>
         <div className='topbarCenter'>
           <div className='searchbar'>
+            {/* Work in progress */}
             <input placeholder='Search for products' className='searchInput' />
           </div>
         </div>
@@ -66,17 +73,16 @@ export default function Home() {
             <select
               className='categories'
               id='category-selec'
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={handleCategoryChange}
             >
               <option value=''>None</option>
               {categoryList}
             </select>
           </div>
-          <input type='submit' value='search' />
         </form>
       </div>
       <div className='main'>
-        {ads.map((a) => (
+        {filteredList.map((a) => (
           <Advert key={a._id} ads={a} />
         ))}
       </div>
