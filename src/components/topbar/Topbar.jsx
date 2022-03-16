@@ -1,37 +1,14 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import './topbar.css';
 
-export default function Topbar() {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const res = await axios.get(
-        'https://fakestoreapi.com/products/categories'
-      );
-      setCategories(res.data);
-    };
-    getCategories();
-  });
-
-  const categoryList = [];
-
-  for (const [i, value] of categories.entries()) {
-    categoryList.push(
-      <option value={value} key={i}>
-        {value}
-      </option>
-    );
-  }
-
+export default function Topbar({ onChange, categoryList }) {
   return (
     <div className='topbarContainer'>
       <div className='topbarLeft'>
-        <h2>Name of the shop</h2>
+        <h2>Virtual Shop</h2>
       </div>
       <div className='topbarCenter'>
         <div className='searchbar'>
+          {/* Work in progress */}
           <input placeholder='Search for products' className='searchInput' />
         </div>
       </div>
@@ -41,13 +18,12 @@ export default function Topbar() {
           <select
             className='categories'
             id='category-selec'
-            onChange={this.selectCategory}
+            onChange={onChange}
           >
             <option value=''>None</option>
             {categoryList}
           </select>
         </div>
-        <input type='submit' value='search' />
       </form>
     </div>
   );

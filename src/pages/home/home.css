@@ -1,3 +1,11 @@
+.main {
+  display: flex;
+  margin: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  min-height: 100vh;
+}
+
 .paginationItem {
   background: #fff;
   border: 2px solid #666;
@@ -20,7 +28,9 @@
 .prev,
 .next {
   background: #fff;
+  align-self: center;
   border: none;
+  height: 10vh;
   padding: 10px;
   color: blue;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
