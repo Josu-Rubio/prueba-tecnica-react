@@ -50,3 +50,12 @@
   box-shadow: none;
   color: #999;
 }
+
+.loader {
+  text-align: center;
+  flex-direction: column;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

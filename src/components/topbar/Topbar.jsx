@@ -1,5 +1,6 @@
 import './topbar.css';
 
+// Topbar for filtering and searching (work in progress)
 export default function Topbar({ onChange, categoryList }) {
   return (
     <div className='topbarContainer'>

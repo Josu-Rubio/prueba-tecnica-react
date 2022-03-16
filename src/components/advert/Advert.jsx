@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './advert.css';
 
 export default function Advert({ ads }) {
+  // Handler to show img or desc of the ad
   const [showDesc, setShowDesc] = useState(false);
   const handleClick = () => setShowDesc(!showDesc);
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import './footer.css';
 
+//Personal footer with copyright
+
 export default function Footer() {
   return (
     <footer className='footer'>
